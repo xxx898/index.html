@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تم التهكير</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: black;
+            color: green;
+            overflow: hidden;
+            height: 100vh;
+            animation: bgColorChange 0.1s infinite;
+        }
+
+        @keyframes bgColorChange {
+            0% { background-color: black; }
+            10% { background-color: red; }
+            20% { background-color: yellow; }
+            30% { background-color: green; }
+            40% { background-color: blue; }
+            50% { background-color: purple; }
+            60% { background-color: pink; }
+            70% { background-color: cyan; }
+            80% { background-color: lime; }
+            90% { background-color: orange; }
+            100% { background-color: white; }
+        }
+
+        /* الأكواد المتساقطة */
+        .falling-code {
+            position: absolute;
+            font-size: 18px;
+            color: limegreen;
+            white-space: nowrap;
+            animation: fall 1s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes fall {
+            0% { top: -20px; opacity: 1; }
+            100% { top: 100vh; opacity: 0; }
+        }
+
+        /* رسائل الخطأ */
+        .error {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            font-family: 'Courier New', Courier, monospace;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: errorMessage 3s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes errorMessage {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        #message {
+            display: none;
+            font-size: 50px;
+            color: red;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <!-- أكواد متساقطة -->
+    <div class="falling-code">█████████████████████</div>
+    <div class="falling-code">ERROR: SYSTEM HACKED</div>
+    <div class="falling-code">ACCESS DENIED</div>
+    <div class="falling-code">WARNING: HACKER DETECTED</div>
+    
+    <!-- رسائل الخطأ -->
+    <div class="error">ERROR 404: PAGE NOT FOUND</div>
+    <div class="error">ERROR 503: SERVICE UNAVAILABLE</div>
+    <div class="error">ERROR 403: FORBIDDEN ACCESS</div>
+    <div class="error">ERROR 500: INTERNAL SERVER ERROR</div>
+
+    <!-- رسالة تم التهكير -->
+    <div id="message">تم التهكير!</div>
+
+    <!-- عنصر الصوت -->
+    <audio id="hackSound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+    <script>
+        // ظهور الأكواد المتساقطة بشكل عشوائي
+        function generateFallingCode() {
+            const messages = [
+                '█████████████████████',
+                'ERROR: SYSTEM HACKED',
+                'ACCESS DENIED',
+                'WARNING: HACKER DETECTED',
+                '█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█',
+                'HACKER MODE ENABLED',
+                '█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█'
+            ];
+
+            let fallingCode = document.createElement('div');
+            fallingCode.classList.add('falling-code');
+            fallingCode.innerText = messages[Math.floor(Math.random() * messages.length)];
+            document.body.appendChild(fallingCode);
+
+            setTimeout(() => {
+                fallingCode.remove();
+            }, 2000); // إخفاء الكود بعد 2 ثانية
+        }
+
+        // توليد الأكواد المتساقطة بشكل مستمر
+        setInterval(generateFallingCode, 300); // كل 300 مللي ثانية
+
+        // إظهار رسالة "تم التهكير!" بعد 5 ثواني
+        setTimeout(() => {
+            document.getElementById('message').style.display = 'block';
+            // تشغيل الصوت عند ظهور الرسالة
+            document.getElementById('hackSound').play();
+        }, 100); // يظهر مباشرة عند فتح الرابط
+    </script>
+</body>
+</html>
